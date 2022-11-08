@@ -199,7 +199,6 @@ class UnetPlus(nn.Module):
             for t in range(self.conf_repeat):
                 epsilon = torch.randn(logit_conf.size()).to(logit_conf.device)
                 logit_total[t] = logit + torch.mul(logit_conf, epsilon)
-            logit = logit_total.mean(0)
-            return logit
+            return logit_total
         return logit
 
