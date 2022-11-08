@@ -67,7 +67,9 @@ def train_Joint(epoch):
         input_2 = input_2.view(-1, args.in_channels, args.img_h, args.img_w)
         target_2 = target_2.view(-1, args.img_h, args.img_w)
         output_2 = model(input_2, conf=True)
-        loss_2 = criterion(output_2, target_2)
+        loss_2 = 0
+        for t in range(output_2.shape[0]):
+            loss_2 += criterion(output_2[t], target_2)
         try:
             data_1 = next(dloader_1)
         except StopIteration:
